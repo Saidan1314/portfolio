@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body,
+  #root {
+    @apply min-h-full;
+  }
+
+  body {
+    @apply bg-ink font-inter text-white antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Anchor navigation clears the fixed navbar (see HEADER_HEIGHT). */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+
+  ::selection {
+    @apply bg-white text-black;
+  }
+
+  /* A single, consistent focus ring for every interactive element. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-white/70 ring-offset-2 ring-offset-black;
+  }
+}
+
+@layer components {
+  /**
+   * Display headings on the dark panels: a vertical steel gradient painted
+   * through the glyphs.
+   */
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /**
+   * A dark pill inside a rotating rainbow rim, with the same rainbow blurred
+   * underneath it as a cast glow.
+   *
+   * Three stacked backgrounds do the work: a flat fill clipped to the padding
+   * box, a soft highlight, and the rainbow clipped to the border box — which
+   * is what leaves the colour visible only in the 1.3px border. Sliding the
+   * shared `background-position` is what makes the rim travel.
+   */
+  .btn-rainbow {
+    --rainbow: linear-gradient(
+      90deg,
+      hsl(0, 100%, 63%),
+      hsl(90, 100%, 63%),
+      hsl(210, 100%, 63%),
+      hsl(195, 100%, 63%),
+      hsl(270, 100%, 63%)
+    );
+
+    position: relative;
+    border: calc(0.08 * 1rem) solid transparent;
+    background-image:
+      linear-gradient(#0c0c0c, #0c0c0c),
+      linear-gradient(#0c0c0c 50%, rgba(12, 12, 12, 0.6) 80%, rgba(12, 12, 12, 0)),
+      var(--rainbow);
+    background-size: 200%;
+    background-clip: padding-box, border-box, border-box;
+    background-origin: border-box;
+    animation: rainbow 2.4s linear infinite;
+  }
+
+  .btn-rainbow::before {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    z-index: 0;
+    width: 60%;
+    height: 20%;
+    transform: translateX(-50%);
+    background-image: var(--rainbow);
+    background-size: 200%;
+    filter: blur(calc(0.8 * 1rem));
+    animation: rainbow 2.4s linear infinite;
+  }
+
+  /**
+   * A label in outline that fills with light on hover.
+   *
+   * Two copies of the same text sit exactly on top of each other. The lower
+   * one is drawn as a hairline outline; the upper is solid white, clipped to
+   * zero width, and widens across the word on hover — the clip edge reads as
+   * a bright cursor sweeping through. Both copies share the same box, so the
+   * text never shifts by a pixel.
+   */
+  .slide-glow {
+    position: relative;
+    display: inline-block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+    color: transparent;
+  }
+
+  .slide-glow__fill {
+    position: absolute;
+    inset: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffffff;
+    -webkit-text-stroke: 1px #ffffff;
+    border-right: 5px solid #ffffff;
+    transition:
+      width 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .slide-glow:hover .slide-glow__fill,
+  .slide-glow:focus-visible .slide-glow__fill {
+    width: 100%;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.85));
+  }
+
+  /**
+   * The primary pill. The gradient, the double inner shadow and the inset
+   * white keyline are one visual unit, so they live together in a component
+   * class instead of being reassembled from arbitrary utilities per usage.
+   */
+  .btn-contact {
+    background: linear-gradient(123deg, #18011f 7%, #b600a8 37%, #7621b0 72%, #be4c00 100%);
+    box-shadow:
+      0 4px 4px rgba(181, 1, 167, 0.25),
+      4px 4px 12px #7721b1 inset;
+    outline: 2px solid #ffffff;
+    outline-offset: -3px;
+  }
+}
+
+@layer utilities {
+  /* ---------------------------------------------------------------------
+   * Keyframes
+   * ------------------------------------------------------------------ */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+   * Orbits. Each ring spins one way and each chip counter-spins at the same
+   * rate, so the logos ride around the circle without ever tipping over.
+   * ------------------------------------------------------------------ */
+  @keyframes orbit-cw {
+    from {
+      transform: rotate(var(--start-angle));
+    }
+    to {
+      transform: rotate(calc(var(--start-angle) + 360deg));
+    }
+  }
+
+  @keyframes orbit-ccw {
+    from {
+      transform: rotate(var(--start-angle));
+    }
+    to {
+      transform: rotate(calc(var(--start-angle) - 360deg));
+    }
+  }
+
+  @keyframes counter-cw {
+    from {
+      transform: rotate(var(--counter-offset, 0deg));
+    }
+    to {
+      transform: rotate(calc(var(--counter-offset, 0deg) - 360deg));
+    }
+  }
+
+  @keyframes counter-ccw {
+    from {
+      transform: rotate(var(--counter-offset, 0deg));
+    }
+    to {
+      transform: rotate(calc(var(--counter-offset, 0deg) + 360deg));
+    }
+  }
+
+  /**
+   * Idle drift for the corner renders. Four uneven waypoints rather than a
+   * clean sine, so the objects wander instead of ticking — paired with a
+   * per-item duration and delay, no two are ever in step.
+   */
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate3d(5px, -8px, 0) rotate(1.4deg);
+    }
+    50% {
+      transform: translate3d(-4px, -13px, 0) rotate(-1deg);
+    }
+    75% {
+      transform: translate3d(-6px, -5px, 0) rotate(0.7deg);
+    }
+  }
+
+  .animate-drift {
+    animation: drift var(--drift-duration, 9s) ease-in-out infinite;
+    animation-delay: var(--drift-delay, 0s);
+    will-change: transform;
+  }
+
+  /** Drives the rainbow rim of `.btn-rainbow` around the button. */
+  @keyframes rainbow {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Typewriter caret. `step-end` snaps between states — a caret must not fade. */
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* ---------------------------------------------------------------------
+   * Entrance utilities.
+   * Every reveal starts hidden and holds its final frame (`forwards`), so
+   * the composition assembles once and stays put.
+   * ------------------------------------------------------------------ */
+  .animate-fade-up,
+  .animate-fade-up-delay-1,
+  .animate-fade-up-delay-2,
+  .animate-fade-up-delay-3,
+  .animate-fade-up-delay-4 {
+    opacity: 0;
+    animation: fade-up 0.8s ease-out forwards;
+    will-change: transform, opacity;
+  }
+
+  .animate-fade-up {
+    animation-delay: 0s;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation-delay: 0.6s;
+  }
+
+  .animate-fade-up-delay-4 {
+    animation-delay: 0.8s;
+  }
+
+  .animate-fade-in,
+  .animate-fade-in-delay {
+    opacity: 0;
+    animation: fade-in 1.2s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation-delay: 0s;
+  }
+
+  .animate-fade-in-delay {
+    animation-delay: 0.4s;
+  }
+
+  .animate-scale-in {
+    opacity: 0;
+    animation: scale-in 0.8s ease-out forwards;
+  }
+
+  /* ---------------------------------------------------------------------
+   * Staggered reveal driven by a `--reveal-delay` custom property, set per
+   * item where the index is only known at render time (mobile menu).
+   * ------------------------------------------------------------------ */
+  .reveal-item {
+    transition:
+      opacity 0.5s theme('transitionTimingFunction.cinematic'),
+      transform 0.5s theme('transitionTimingFunction.cinematic');
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-item-hidden {
+    @apply translate-y-5 opacity-0;
+  }
+
+  .reveal-item-visible {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+/* Respect the user's motion preference: show the final composition instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

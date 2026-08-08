@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <title>Neural network</title>
+  <defs>
+    <linearGradient id="nn-edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7DD3FC" />
+      <stop offset="0.5" stop-color="#A78BFA" />
+      <stop offset="1" stop-color="#E879F9" />
+    </linearGradient>
+
+    <radialGradient id="nn-node" cx="0.32" cy="0.28" r="0.85">
+      <stop offset="0" stop-color="#F5F3FF" />
+      <stop offset="0.32" stop-color="#C4B5FD" />
+      <stop offset="0.72" stop-color="#8B5CF6" />
+      <stop offset="1" stop-color="#5B21B6" />
+    </radialGradient>
+
+    <radialGradient id="nn-node-cool" cx="0.32" cy="0.28" r="0.85">
+      <stop offset="0" stop-color="#F0F9FF" />
+      <stop offset="0.32" stop-color="#A5E8FF" />
+      <stop offset="0.72" stop-color="#38BDF8" />
+      <stop offset="1" stop-color="#1E3A8A" />
+    </radialGradient>
+
+    <filter id="nn-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#8B5CF6" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <g filter="url(#nn-glow)">
+    <!-- Input layer to hidden layer -->
+    <g stroke="url(#nn-edge)" stroke-width="1.6" stroke-linecap="round" opacity="0.55" fill="none">
+      <path d="M45 70 L110 50 M45 70 L110 90 M45 70 L110 130 M45 70 L110 170" />
+      <path d="M45 110 L110 50 M45 110 L110 90 M45 110 L110 130 M45 110 L110 170" />
+      <path d="M45 150 L110 50 M45 150 L110 90 M45 150 L110 130 M45 150 L110 170" />
+      <path d="M110 50 L175 90 M110 50 L175 130" />
+      <path d="M110 90 L175 90 M110 90 L175 130" />
+      <path d="M110 130 L175 90 M110 130 L175 130" />
+      <path d="M110 170 L175 90 M110 170 L175 130" />
+    </g>
+
+    <!-- Nodes -->
+    <g>
+      <circle cx="45" cy="70" r="12" fill="url(#nn-node-cool)" />
+      <circle cx="45" cy="110" r="12" fill="url(#nn-node-cool)" />
+      <circle cx="45" cy="150" r="12" fill="url(#nn-node-cool)" />
+
+      <circle cx="110" cy="50" r="11" fill="url(#nn-node)" />
+      <circle cx="110" cy="90" r="11" fill="url(#nn-node)" />
+      <circle cx="110" cy="130" r="11" fill="url(#nn-node)" />
+      <circle cx="110" cy="170" r="11" fill="url(#nn-node)" />
+
+      <circle cx="175" cy="90" r="13" fill="url(#nn-node)" />
+      <circle cx="175" cy="130" r="13" fill="url(#nn-node)" />
+    </g>
+
+    <!-- Specular highlights, so the nodes read as glass rather than dots -->
+    <g fill="#FFFFFF" opacity="0.75">
+      <ellipse cx="41" cy="65" rx="3.6" ry="2.4" transform="rotate(-32 41 65)" />
+      <ellipse cx="41" cy="105" rx="3.6" ry="2.4" transform="rotate(-32 41 105)" />
+      <ellipse cx="41" cy="145" rx="3.6" ry="2.4" transform="rotate(-32 41 145)" />
+      <ellipse cx="106" cy="46" rx="3.2" ry="2.1" transform="rotate(-32 106 46)" />
+      <ellipse cx="106" cy="86" rx="3.2" ry="2.1" transform="rotate(-32 106 86)" />
+      <ellipse cx="106" cy="126" rx="3.2" ry="2.1" transform="rotate(-32 106 126)" />
+      <ellipse cx="106" cy="166" rx="3.2" ry="2.1" transform="rotate(-32 106 166)" />
+      <ellipse cx="170" cy="85" rx="3.9" ry="2.6" transform="rotate(-32 170 85)" />
+      <ellipse cx="170" cy="125" rx="3.9" ry="2.6" transform="rotate(-32 170 125)" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <title>AI processor</title>
+  <defs>
+    <linearGradient id="chip-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#DDD6FE" />
+      <stop offset="0.35" stop-color="#A78BFA" />
+      <stop offset="0.72" stop-color="#7C3AED" />
+      <stop offset="1" stop-color="#3B1D8F" />
+    </linearGradient>
+
+    <linearGradient id="chip-pin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#BAE6FD" />
+      <stop offset="1" stop-color="#38BDF8" />
+    </linearGradient>
+
+    <radialGradient id="chip-core" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#FFFFFF" />
+      <stop offset="0.3" stop-color="#F0ABFC" />
+      <stop offset="0.75" stop-color="#C026D3" />
+      <stop offset="1" stop-color="#701A75" />
+    </radialGradient>
+
+    <linearGradient id="chip-sheen" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.72" />
+      <stop offset="0.55" stop-color="#FFFFFF" stop-opacity="0.08" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <filter id="chip-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#7C3AED" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <g filter="url(#chip-glow)">
+    <!-- Pins -->
+    <g fill="url(#chip-pin)">
+      <rect x="80" y="41" width="10" height="16" rx="4" />
+      <rect x="105" y="41" width="10" height="16" rx="4" />
+      <rect x="130" y="41" width="10" height="16" rx="4" />
+
+      <rect x="80" y="163" width="10" height="16" rx="4" />
+      <rect x="105" y="163" width="10" height="16" rx="4" />
+      <rect x="130" y="163" width="10" height="16" rx="4" />
+
+      <rect x="41" y="80" width="16" height="10" rx="4" />
+      <rect x="41" y="105" width="16" height="10" rx="4" />
+      <rect x="41" y="130" width="16" height="10" rx="4" />
+
+      <rect x="163" y="80" width="16" height="10" rx="4" />
+      <rect x="163" y="105" width="16" height="10" rx="4" />
+      <rect x="163" y="130" width="16" height="10" rx="4" />
+    </g>
+
+    <!-- Package -->
+    <rect x="55" y="55" width="110" height="110" rx="24" fill="url(#chip-body)" />
+
+    <!-- Die -->
+    <rect
+      x="78"
+      y="78"
+      width="64"
+      height="64"
+      rx="18"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity="0.5"
+      stroke-width="2"
+    />
+    <circle cx="110" cy="110" r="19" fill="url(#chip-core)" />
+    <ellipse cx="103" cy="102" rx="5.4" ry="3.6" fill="#FFFFFF" opacity="0.8" transform="rotate(-32 103 102)" />
+
+    <!-- Sheen across the package, so it reads as moulded glass -->
+    <path d="M55 79 A24 24 0 0 1 79 55 H130 L70 148 A24 24 0 0 1 55 126 Z" fill="url(#chip-sheen)" />
+  </g>
+</svg>
