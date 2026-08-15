@@ -15,7 +15,7 @@ interests, and other information in a clean and interactive interface.
 The design and structure were developed iteratively, with a focus on
 simplicity, visual presentation, responsiveness, and user experience.
 
-## ✨ Features
+## Features
 
 - Responsive design for desktop and mobile
 - Available in English and Spanish, switchable from the navigation bar
@@ -29,7 +29,7 @@ simplicity, visual presentation, responsiveness, and user experience.
 - Résumé download
 - Contact and social links
 
-## 🛠️ Built With
+## Built With
 
 - **React** and **TypeScript**
 - **Vite** as the build tool
@@ -38,7 +38,7 @@ simplicity, visual presentation, responsiveness, and user experience.
 - **Spline** for the 3D scene
 - Deployed on **Vercel**
 
-## ⚙️ How It Works
+## How It Works
 
 The portfolio is organized into different sections that can be accessed
 through the navigation menu.
@@ -50,7 +50,7 @@ experience across devices.
 The language switch changes every piece of text on the page at once, and the
 choice is remembered for the next visit.
 
-## 🤖 AI-Assisted Development
+## AI-Assisted Development
 
 This project was developed with the assistance of Claude Code.
 
@@ -61,7 +61,7 @@ The project was developed through an iterative process of defining
 requirements, reviewing the generated results, identifying changes, and
 refining the implementation.
 
-## 🚀 Running Locally
+## Running Locally
 
 Clone the repository:
 
@@ -98,7 +98,7 @@ the development server.
 | `npm run preview` | Serve the production build locally          |
 | `npm run lint`    | Lint                                        |
 
-## 📌 Status
+## Status
 
 Continuously improving and updating as new projects and ideas are added.
 
